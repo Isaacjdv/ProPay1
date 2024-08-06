@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrarse</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style media="screen">
+    *,
+    *:before,
+    *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body {
+        background-color: #080710;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+    .registro-container {
+        width: 400px;
+        background-color: rgba(255, 255, 255, 0.13);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        padding: 50px 35px;
+        text-align: center;
+        opacity: 0; /* Comienza invisible */
+        transition: opacity 1s ease-in-out; /* Efecto de desvanecimiento */
+    }
+    .registro-container.visible {
+        opacity: 1; /* Hacer visible */
+    }
+    .registro-container * {
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+    }
+    .registro-container h1 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 42px;
+        margin-bottom: 20px;
+    }
+    input {
+        display: block;
+        height: 50px;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.07);
+        border-radius: 3px;
+        padding: 0 10px;
+        margin-top: 15px;
+        font-size: 14px;
+        font-weight: 300;
+        transition: background-color 0.3s ease; /* Efecto de transición en el fondo */
+    }
+    input:focus {
+        background-color: rgba(255, 255, 255, 0.2); /* Fondo al enfocar */
+    }
+    button {
+        margin-top: 30px;
+        width: 100%;
+        background-color: #3180e9; /* Color de fondo */
+        color: #ffffff; /* Color del texto */
+        padding: 15px 0;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s ease; /* Efecto de transición en el fondo */
+    }
+    button:hover {
+        background-color: #2563eb; /* Color de fondo al pasar el ratón */
+    }
+    .message-popup {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #fff;
+        color: #000;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        opacity: 0; /* Comienza invisible */
+        transition: opacity 1s ease-in-out; /* Efecto de desvanecimiento */
+    }
+    .message-popup.visible {
+        display: block; /* Mostrar el popup */
+        opacity: 1; /* Hacer visible */
+    }
+    .message-popup.success {
+        background-color: #d4edda; /* Color verde para éxito */
+    }
+    .message-popup.error {
+        background-color: #f8d7da; /* Color rojo para error */
+    }
+    .message-popup button {
+        margin-top: 10px;
+        background: #080710;
+        color: #fff;
+    }
+    .back-to-login {
+        margin-top: 20px;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #3180e9;
+        color: #ffffff;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+    .back-to-login:hover {
+        background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+    <div class="registro-container">
+        <h1>Registrarse</h1>
+        <form id="registro-form">
+            <input type="text" id="new-username" placeholder="Nuevo Usuario" required>
+            <input type="password" id="new-password" placeholder="Nueva Contraseña" required>
+            <button type="submit">Registrar</button>
+            <a href="../index.html" class="back-to-login">Volver al Inicio</a>
+        </form>
+    </div>
+    <div id="message-popup" class="message-popup">
+        <p id="message-text"></p>
+        <button id="message-close">Cerrar</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mostrar la registro-container con efecto de desvanecimiento
+            const registroContainer = document.querySelector('.registro-container');
+            registroContainer.classList.add('visible');
+        });
+
+        document.getElementById('registro-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('new-username').value;
+            const password = document.getElementById('new-password').value;
+
+            const messagePopup = document.getElementById('message-popup');
+            const messageText = document.getElementById('message-text');
+            const messageClose = document.getElementById('message-close');
+
+            // Obtener usuarios almacenados
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Verificar si el usuario ya existe
+            const userExists = users.some(user => user.username === username);
+
+            if (userExists) {
+                // Mostrar mensaje si el usuario ya existe
+                messageText.textContent = 'El usuario ya existe';
+                messagePopup.classList.add('visible', 'error');
+            } else {
+                // Agregar nuevo usuario al almacenamiento local
+                users.push({ username, password });
+                localStorage.setItem('users', JSON.stringify(users));
+
+                // Mostrar mensaje de éxito
+                messageText.textContent = '¡Registro exitoso!';
+                messagePopup.classList.add('visible', 'success');
+            }
+
+            // Cerrar mensaje emergente
+            messageClose.addEventListener('click', function () {
+                messagePopup.classList.remove('visible');
+            });
+        });
+    </script>
+</body>
+</html>

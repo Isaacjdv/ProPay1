@@ -1,0 +1,168 @@
+/* estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #080710;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+header button {
+    background-color: #e63946;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+header button:hover {
+    background-color: #d62839;
+}
+
+main {
+    padding: 20px;
+}
+
+.filter-section,
+.table-section,
+.admin-section,
+.faq-section {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section h2,
+.table-section h2,
+.admin-section h2,
+.faq-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.filter-section form,
+.admin-section form {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-section input,
+.admin-section input,
+.admin-section select {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.filter-section button,
+.admin-section button {
+    background-color: #3180e9;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.filter-section button:hover,
+.admin-section button:hover {
+    background-color: #2563eb;
+}
+
+.table-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-section th,
+.table-section td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.table-section th {
+    background-color: #3180e9;
+}
+
+.table-section tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.faq-section {
+    margin-top: 30px;
+}
+
+.faq-item {
+    margin-bottom: 10px;
+}
+
+.faq-item h3 {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+footer p {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header button {
+        margin-top: 10px;
+    }
+}

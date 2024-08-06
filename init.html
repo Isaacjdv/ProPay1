@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicializar Usuarios</title>
+</head>
+<body>
+    <script>
+        // Crear una función para inicializar los usuarios
+        function initializeUsers() {
+            const users = [
+                { username: 'Isaac', password: '1234' },
+                { username: 'admin1', password: '12345' }
+            ];
+
+            // Guardar los usuarios en localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Usuarios inicializados correctamente');
+        }
+
+        // Ejecutar la función para inicializar los usuarios
+        initializeUsers();
+    </script>
+</body>
+</html>
